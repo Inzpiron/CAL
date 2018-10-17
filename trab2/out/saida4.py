@@ -1,0 +1,15 @@
+import matplotlib.pyplot as plt 
+plt.bar([1], [21.6806],label='vector Ins.', color = 'green')
+plt.bar([0], [107.441],label='hash Ins.', color = 'blue')
+plt.bar([4], [26.4303],label='hash Bus.', color = 'darkblue')
+plt.bar([2], [140.763],label='Map Ins.', color = 'red')
+plt.bar([6], [44.1249],label='Map Bus.', color = 'darkred')
+plt.bar([5], [14444.4],label='vector Bus.', color = 'darkgreen')
+plt.xlabel('Estruturas')
+plt.ylabel('Tempo MS')
+plt.title('Entrada-4 (100000x25000)')
+plt.xticks([])
+plt.ylim(0, 150)
+plt.legend()
+plt.savefig('../Imgs/graph4.png')
+

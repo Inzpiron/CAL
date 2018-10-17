@@ -20,6 +20,7 @@ namespace trab2 {
         void iniciar(int);
         void add(int, string);
         int buscar(string);
+        void printHistograma();
     }
 }
 

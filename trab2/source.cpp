@@ -93,14 +93,24 @@ namespace trab2 {
         void add(int index, string nome) {
             int i = hashing(nome);
             buff[i][nome] = index;
+            cout << i << "|";
         }
 
-        int buscar(string nome) {
+        int buscar(string nome) { //pior = (log(n)), melhor = 
             int i = hashing(nome);
             if(buff[i].count(nome) > 0)
                 return buff[i][nome];
 
             return -1;
+        }
+
+        void printHistograma (){
+            for(int i = 0; i < n; i++) {
+                cout << buff[i].size();
+                if(i != n-1)
+                    cout << "|";
+            }
+            cout << endl;
         }
     }
 }
