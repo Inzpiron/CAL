@@ -90,27 +90,18 @@ namespace trab2 {
             buff = new std::map<string, int>[n];
         }
 
-        void add(int index, string nome) {
+        void add(int index, string nome) { //pior/melhor caso = (nome.size()) + (log(n))
             int i = hashing(nome);
             buff[i][nome] = index;
             cout << i << "|";
         }
 
-        int buscar(string nome) { //pior = (log(n)), melhor = 
+        int buscar(string nome) { //pior/melhor caso = (nome.size()) + (log(n))
             int i = hashing(nome);
             if(buff[i].count(nome) > 0)
                 return buff[i][nome];
 
             return -1;
-        }
-
-        void printHistograma (){
-            for(int i = 0; i < n; i++) {
-                cout << buff[i].size();
-                if(i != n-1)
-                    cout << "|";
-            }
-            cout << endl;
         }
     }
 }
