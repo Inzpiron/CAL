@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Vetor', 'Ordenado', 'Ordenado (*)', 'Randon', 'Randon (*)','','Ordenado', 'Ordenado (*)', 'Randon', 'Randon (*)'],
+          ['25K', 123,124,124,1074,0,132,135,144,152],
+          ['50K', 133,133,134,1081,0,137,137,160,175],
+          ['75K', 127,127,128,1075,0,144,156,155,202],
+          ['100K', 133,133,134,1087,0,157,157,188,226],
+          ['1M', 166,164,260,1198,0,536,649,655,1167]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Teste Counting vs Bucket',
+            subtitle: 'Tempo (ms)',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+  </body>
+</html>

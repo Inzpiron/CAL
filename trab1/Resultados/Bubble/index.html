@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Vetor', 'Ordenado', 'Ordenado (*)', 'Randon', 'Randon (*)'],
+          ['25K', 5443, 7833, 7237, 6644],
+          ['50K', 21099, 31880, 27106.27, 27106],
+          ['75K', 46488, 70376, 59240, 58223],
+          ['100K', 83807, 126845, 104089, 104222],
+          ['1M', 0, 0, 0, 0]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Teste BubbleSort',
+            subtitle: 'Tempo (ms)',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+  </body>
+</html>

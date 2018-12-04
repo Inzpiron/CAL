@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+              ['Vetor', 'Ordenado', 'Ordenado (*)', 'Randon', 'Randon (*)'],
+              ['25K', 132,135,144,152],
+              ['50K', 137,137,160,175],
+              ['75K', 144,156,155,202],
+              ['100K', 157,157,188,226],
+              ['1M', 536,649,655,1167]
+          ]);
+
+        var options = {
+          chart: {
+            title: 'Teste BucketSort',
+            subtitle: 'Tempo (ms)',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+  </body>
+</html>
