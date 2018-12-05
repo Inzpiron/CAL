@@ -80,14 +80,13 @@ void trab4::guloso::run(int u, vector<bool>& visitado, int n, double dist) {
     if(n == visitado.size()) {
         check = true;
         konst = dist + g.mAdj[0][u];
-    }
-
-    sort(g.lAdj[u].begin(), g.lAdj[u].end());
-    for(int i = 0; i < g.lAdj[u].size(); i++) {
-        pair<int, int> v = g.lAdj[u][i];
-        if(v.second != u && !check && !visitado[v.second]) {
-            visitado[v.second] = true;
-            run(v.second, visitado, n+1, dist + g.mAdj[u][v.second]);
+    } else {
+        for(int i = 0; i < g.lAdj[u].size(); i++) {
+            pair<int, int> v = g.lAdj[u][i];
+            if(v.second != u && !check && !visitado[v.second]) {
+                visitado[v.second] = true;
+                run(v.second, visitado, n+1, dist + g.mAdj[u][v.second]);
+            }
         }
     }
 }
@@ -102,3 +101,52 @@ double trab4::guloso::startWorker(Graph& _g) {
     return konst;
 }
 ///fim
+
+
+///aproximação
+double trab4::aprox::prim(){
+    vector<double> dist(g.mAdj.size(), INF);
+    vector<bool> visitado(g.mAdj.size(), false);
+    int curr = 0;
+    double custo = 0;
+    while (curr != -1) {
+        visitado[curr]= true;
+
+        for (int i = 0; i < g.mAdj.size(); i++) {
+            if (curr != i && g.mAdj[curr][i] != 0) {
+                dist[i] = min(dist[i], g.mAdj[curr][i]);
+            }
+        }
+    
+        int curr_aux = -1;
+        int min_dist = INF;
+        for (int i = 0; i < g.mAdj.size(); i++) {
+            if (!visitado[i] && dist[i] < min_dist) {
+                curr_aux = i;
+                min_dist = dist[i];
+            }
+        }
+
+        if(curr_aux == -1) {
+            custo += g.mAdj[curr][0];
+            curr = -1;
+        } else {
+            cout << curr << " " << curr_aux << " " <<  g.mAdj[curr][curr_aux] << endl;
+            mst[curr].push_back(curr_aux);
+            mst[curr_aux].push_back(curr);
+            curr = curr_aux;
+            custo += g.mAdj[curr][curr_aux];
+        }
+    }
+
+    return custo;
+}
+
+double trab4::aprox::startWorker(Graph& _g) {
+    g = _g;
+    mst = vector<vector<int> >(g.mAdj.size());
+    konst = prim();
+
+    return konst;
+}
+///

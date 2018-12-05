@@ -30,6 +30,19 @@ namespace trab4 {
         const int INF = 0x3f3f3f3f;
     }
 
+
+    namespace aprox{
+        namespace {
+            Graph g;
+            double konst = INF;
+            vector< vector < int > > mst;
+        }
+        double prim();
+        void run(int, vector<bool>&, int, double);
+        double startWorker(Graph&);
+    }
+
+
     namespace guloso {
         namespace {
             Graph g;

@@ -40,18 +40,24 @@ int main(int argc, char ** argv) {
     //     cout << endl;
     // }
     // cout << endl;
-    // for(int i =0 ; i < g.mAdj.size(); i++) {
-    //     cout << i << ": ";
-    //     for(int j = 0; j < g.mAdj[i].size(); j++) {
-    //         cout << "(" << g.mAdj[i][j]  << ") - ";
-    //     }
-    //     cout << endl;
-    // }
+    for(int i =0 ; i < g.mAdj.size(); i++) {
+         cout << i << ": ";
+         for(int j = 0; j < g.mAdj[i].size(); j++) {
+             cout << "(" << g.mAdj[i][j]  << ") - ";
+         }
+         cout << endl;
+     }
     cout << "[Pré processamento] OK (" << trab4::pCronometro() << "s)" << endl;
     
+    cout << "[Guloso] ..." << endl;
     trab4::iCronometro();
     cout << "[Guloso] " << trab4::guloso::startWorker(g) << " (" <<trab4::pCronometro() << "s)" << endl;
-    
+
+    cout << "[Aproximação] ..." << endl;
+    trab4::iCronometro();
+    cout << "[Aproximação] " << trab4::aprox::startWorker(g) << " (" << trab4::pCronometro() << "s)" << endl; 
+
+    cout << "[Backtracking] ..." << endl;
     trab4::iCronometro();
     cout << "[Backtracking] " << trab4::backtracking::startWorker(g) << " (" << trab4::pCronometro() << "s)" <<endl;
     return 0;
