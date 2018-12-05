@@ -44,8 +44,8 @@ void trab4::Graph::connect(int u, int v){
     double dist = sqrt(pow(nodelist[u].x - nodelist[v].x, 2) + pow(nodelist[u].y - nodelist[v].y, 2));
     mAdj[u][v] = dist;
     mAdj[v][u] = dist;
-    lAdj[u].push_back({dist, v});
-    lAdj[v].push_back({dist, u});
+    //lAdj[u].push_back({dist, v});
+    //lAdj[v].push_back({dist, u});
 }
 ///fim
 
@@ -64,19 +64,13 @@ void trab4::backtracking::run(int u, vector<bool> visitado, int n, double dist) 
     }
 }
 
-void trab4::backtracking::startWorker(Graph &_g) {
+double trab4::backtracking::startWorker(Graph &_g) {
     g = _g;
-             //0, 1, 2, 3, 4
-    /*g.mAdj = {{0, 2, 4, 2, 1},
-              {2, 0, 5, 4, 3},
-              {4, 5, 0, 6, 1},
-              {2, 4, 6, 0, 2},
-              {1, 3, 1, 2, 0}};*/
     vector<bool> v(g.mAdj.size(), false);
     v[0] = true;
     konst = INF;
     run(0, v, 1, 0.0);
-    cout << "[Backtracking] " << konst << endl;        
+    return konst;
 }
 ///fim
 
@@ -90,23 +84,21 @@ void trab4::guloso::run(int u, vector<bool>& visitado, int n, double dist) {
 
     sort(g.lAdj[u].begin(), g.lAdj[u].end());
     for(int i = 0; i < g.lAdj[u].size(); i++) {
-        if(i != u) {
-            pair<int, int> v = g.lAdj[u][i];
-
-            if(!visitado[v.second] && !check) {
-                visitado[v.second] = true;
-                run(v.second, visitado, n+1, dist + v.first);
-            }
+        pair<int, int> v = g.lAdj[u][i];
+        if(v.second != u && !check && !visitado[v.second]) {
+            visitado[v.second] = true;
+            run(v.second, visitado, n+1, dist + g.mAdj[u][v.second]);
         }
     }
 }
 
-void trab4::guloso::startWorker(Graph& _g) {
+double trab4::guloso::startWorker(Graph& _g) {
     g = _g;
     check = false;
     vector<bool> v(g.mAdj.size(), false);
     v[0] = true;
     run(0, v, 1, 0.0);
-    cout << "[Guloso] " << konst << endl;
+
+    return konst;
 }
 ///fim

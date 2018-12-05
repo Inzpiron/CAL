@@ -38,7 +38,7 @@ namespace trab4 {
         }
 
         void run(int, vector<bool>&, int, double);
-        void startWorker(Graph&);
+        double startWorker(Graph&);
     }
 
     namespace backtracking {
@@ -48,7 +48,7 @@ namespace trab4 {
         }
 
         void run(int, vector<bool>, int, double);
-        void startWorker(Graph&);
+        double startWorker(Graph&);
     }
 }
 
